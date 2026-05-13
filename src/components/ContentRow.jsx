@@ -2,7 +2,7 @@ import AnimeCard from './AnimeCard';
 import SkeletonCard from './SkeletonCard';
 import './ContentRow.css';
 
-const SKELETONS = Array(6).fill(null);
+const SKELETONS = Array(8).fill(null);
 
 export default function ContentRow({
   title,

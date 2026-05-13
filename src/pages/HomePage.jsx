@@ -53,7 +53,7 @@ export default function HomePage({ onNavigate, myList, onToggleList }) {
   const { data: romance, loading: romanceLoading } = useAnimeData('/anime?genres=22&limit=20');
   const { data: recommended, loading: recommendedLoading } = useAnimeData('/recommendations/anime');
 
-  // Flatten recommendations
+  // Aplanar recomendaciones de la API
   const recommendedAnime = recommended?.slice(0, 12).map(r => r.entry) || null;
 
   return (
@@ -72,28 +72,28 @@ export default function HomePage({ onNavigate, myList, onToggleList }) {
       {/* Content Rows */}
       <div className="home-page__rows">
         <ContentRow
-          title="Trending Now"
+          title="En Tendencia"
           emoji="🔥"
           data={trending}
           loading={trendingLoading}
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Most Watched"
+          title="Más Vistos"
           emoji="👁"
           data={mostWatched}
           loading={mostWatchedLoading}
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="New Episodes"
+          title="Nuevos Episodios"
           emoji="🆕"
           data={newEpisodes}
           loading={newEpisodesLoading}
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Popular Movies"
+          title="Películas Populares"
           emoji="🎬"
           data={movies}
           loading={moviesLoading}
@@ -101,14 +101,14 @@ export default function HomePage({ onNavigate, myList, onToggleList }) {
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Action Anime"
+          title="Anime de Acción"
           emoji="⚔️"
           data={action}
           loading={actionLoading}
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Sci-Fi Anime"
+          title="Anime Sci-Fi"
           emoji="🚀"
           data={scifi}
           loading={scifiLoading}
@@ -122,14 +122,14 @@ export default function HomePage({ onNavigate, myList, onToggleList }) {
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Continue Watching"
+          title="Continuar Viendo"
           emoji="▶"
           mockData={CONTINUE_WATCHING}
           loading={false}
           onNavigate={onNavigate}
         />
         <ContentRow
-          title="Recommended For You"
+          title="Recomendados Para Ti"
           emoji="✨"
           data={recommendedAnime}
           loading={recommendedLoading}

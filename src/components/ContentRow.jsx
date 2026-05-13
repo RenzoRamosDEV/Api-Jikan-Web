@@ -23,7 +23,7 @@ export default function ContentRow({
           {emoji && <span className="content-row__emoji">{emoji}</span>}
           {title}
         </h2>
-        <button className="content-row__see-all">See All →</button>
+        <button className="content-row__see-all">Ver todo →</button>
       </div>
 
       <div className="content-row__scroll-container">
@@ -33,7 +33,7 @@ export default function ContentRow({
           ))}
           {error && (
             <div className="content-row__error">
-              Failed to load: {error}
+              Error al cargar: {error}
             </div>
           )}
           {!loading && items && items.map((anime, i) => (

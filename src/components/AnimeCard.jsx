@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import './AnimeCard.css';
 
 const PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIwIiBoZWlnaHQ9IjMxMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTIyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJJbnRlcixzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjNDQ0NDY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=';
 
-export default function AnimeCard({ anime, landscape = false, progress = null, onNavigate }) {
+function AnimeCard({ anime, landscape = false, progress = null, onNavigate }) {
   if (!anime) return null;
 
   const imageUrl =
@@ -67,3 +68,5 @@ export default function AnimeCard({ anime, landscape = false, progress = null, o
     </div>
   );
 }
+
+export default memo(AnimeCard);

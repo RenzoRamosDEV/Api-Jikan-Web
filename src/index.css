@@ -86,19 +86,19 @@ a {
   background: var(--accent-neon);
 }
 
-/* ===== GLASS MIXIN (utility class) ===== */
+/* ===== CLASE UTILITARIA GLASSMORPHISM ===== */
 .glass {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
               0 0 0 0.5px rgba(255, 255, 255, 0.05) inset,
               0 1px 0 rgba(255, 255, 255, 0.1) inset;
 }
 
-/* ===== ANIMATIONS ===== */
+/* ===== ANIMACIONES ===== */
 @keyframes kenBurns {
   from {
     transform: scale(1) translate(0, 0);

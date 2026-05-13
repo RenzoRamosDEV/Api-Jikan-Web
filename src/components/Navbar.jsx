@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Navbar.css';
 
-const NAV_LINKS = ['Home', 'Trending', 'Movies', 'Series', 'My List', 'Search'];
+const NAV_LINKS = ['Inicio', 'Tendencias', 'Películas', 'Series', 'Mi Lista', 'Buscar'];
 
 export default function Navbar({ onNavigateHome, currentPage }) {
   const [activeLink, setActiveLink] = useState('Home');

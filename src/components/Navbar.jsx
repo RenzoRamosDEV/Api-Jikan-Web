@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './Navbar.css';
 
 const NAV_LINKS = ['Inicio', 'Tendencias', 'Películas', 'Series', 'Mi Lista', 'Buscar'];
@@ -6,11 +6,12 @@ const NAV_LINKS = ['Inicio', 'Tendencias', 'Películas', 'Series', 'Mi Lista', '
 export default function Navbar({ onNavigateHome, currentPage }) {
   const [activeLink, setActiveLink] = useState('Home');
 
-  function handleLinkClick(link) {
+  const handleLinkClick = useCallback((link) => {
     setActiveLink(link);
-    if (link === 'Home') {
+    if (link === 'Inicio') {
       onNavigateHome();
     }
+  }, [onNavigateHome]);
   }
 
   return (

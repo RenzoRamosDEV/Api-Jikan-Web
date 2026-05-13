@@ -32,9 +32,14 @@ export function useAnimeData(endpoint) {
       lastRequestTime = Date.now();
       try {
         const res = await fetch(`https://api.jikan.moe/v4${endpoint}`);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
         const json = await res.json();
         const result = json.data;
+        // Limitar tamaño del caché para evitar consumo excesivo de memoria
+        if (cache.size >= CACHE_MAX_SIZE) {
+          const firstKey = cache.keys().next().value;
+          cache.delete(firstKey);
+        }
         cache.set(endpoint, result);
         setData(result);
       } catch (e) {

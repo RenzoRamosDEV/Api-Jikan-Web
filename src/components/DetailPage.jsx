@@ -81,49 +81,49 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
             <div className="detail-card__stats">
               {anime.score && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Score</span>
+                  <span className="detail-stat__label">Puntuación</span>
                   <span className="detail-stat__value">⭐ {anime.score.toFixed(1)}</span>
                 </div>
               )}
               {anime.rank && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Rank</span>
+                  <span className="detail-stat__label">Ranking</span>
                   <span className="detail-stat__value">#{anime.rank}</span>
                 </div>
               )}
               {(anime.year || anime.aired?.prop?.from?.year) && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Year</span>
+                  <span className="detail-stat__label">Año</span>
                   <span className="detail-stat__value">{anime.year || anime.aired?.prop?.from?.year}</span>
                 </div>
               )}
               {anime.type && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Type</span>
+                  <span className="detail-stat__label">Tipo</span>
                   <span className="detail-stat__value">{anime.type}</span>
                 </div>
               )}
               {anime.episodes && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Episodes</span>
+                  <span className="detail-stat__label">Episodios</span>
                   <span className="detail-stat__value">{anime.episodes}</span>
                 </div>
               )}
               {anime.studios?.[0] && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Studio</span>
+                  <span className="detail-stat__label">Estudio</span>
                   <span className="detail-stat__value">{anime.studios[0].name}</span>
                 </div>
               )}
               {anime.source && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Source</span>
+                  <span className="detail-stat__label">Fuente</span>
                   <span className="detail-stat__value">{anime.source}</span>
                 </div>
               )}
               {anime.status && (
                 <div className="detail-stat">
-                  <span className="detail-stat__label">Status</span>
+                  <span className="detail-stat__label">Estado</span>
                   <span className="detail-stat__value">{anime.status}</span>
                 </div>
               )}
@@ -131,11 +131,11 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
 
             {/* Action Buttons */}
             <div className="detail-card__actions">
-              <button className="btn-primary">▶ Watch Now</button>
+              <button className="btn-primary">▶ Ver Ahora</button>
               <button className="btn-glass" onClick={() => onToggleList && onToggleList(anime)}>
-                {isInList ? '✓ In My List' : '+ My List'}
+                {isInList ? '✓ En Mi Lista' : '+ Mi Lista'}
               </button>
-              <button className="btn-glass">↓ Download</button>
+              <button className="btn-glass">↓ Descargar</button>
             </div>
 
             {/* Genres */}

@@ -152,7 +152,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
         {/* Synopsis */}
         {synopsis && (
           <section className="detail-section">
-            <h2 className="detail-section__title">Synopsis</h2>
+            <h2 className="detail-section__title">Sinopsis</h2>
             <p className="detail-synopsis">
               {synopsisExpanded ? synopsis : shortSynopsis}
             </p>
@@ -161,7 +161,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
                 className="detail-synopsis__toggle"
                 onClick={() => setSynopsisExpanded(e => !e)}
               >
-                {synopsisExpanded ? 'Show Less ↑' : 'Show More ↓'}
+                {synopsisExpanded ? 'Ver menos ↑' : 'Ver más ↓'}
               </button>
             )}
           </section>
@@ -170,15 +170,15 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
         {/* Episodes */}
         {episodes && episodes.length > 0 && (
           <section className="detail-section">
-            <h2 className="detail-section__title">Episodes</h2>
+            <h2 className="detail-section__title">Episodios</h2>
             <div className="detail-episodes">
               {episodes.slice(0, 20).map(ep => (
                 <div key={ep.mal_id} className="episode-card glass">
                   <div className="episode-card__num">{ep.episode_id || ep.mal_id}</div>
                   <div className="episode-card__info">
-                    <p className="episode-card__title">{ep.title || `Episode ${ep.episode_id}`}</p>
+                    <p className="episode-card__title">{ep.title || `Episodio ${ep.episode_id}`}</p>
                     {ep.aired && (
-                      <p className="episode-card__date">{new Date(ep.aired).toLocaleDateString()}</p>
+                      <p className="episode-card__date">{new Date(ep.aired).toLocaleDateString('es-ES')}</p>
                     )}
                   </div>
                   <button className="episode-card__play">▶</button>
@@ -191,7 +191,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
         {/* Characters */}
         {characters && characters.length > 0 && (
           <section className="detail-section">
-            <h2 className="detail-section__title">Characters &amp; Voice Actors</h2>
+            <h2 className="detail-section__title">Personajes y Actores de Voz</h2>
             <div className="detail-characters">
               {characters.slice(0, 12).map(c => (
                 <div key={c.character?.mal_id} className="char-card glass">
@@ -206,7 +206,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
                     <p className="char-card__name">{c.character?.name}</p>
                     <p className="char-card__role">{c.role}</p>
                     {c.voice_actors?.[0] && (
-                      <p className="char-card__va">VA: {c.voice_actors[0].person?.name}</p>
+                      <p className="char-card__va">Voz: {c.voice_actors[0].person?.name}</p>
                     )}
                   </div>
                 </div>
@@ -218,13 +218,13 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
         {/* Gallery */}
         {pictures && pictures.length > 0 && (
           <section className="detail-section">
-            <h2 className="detail-section__title">Gallery</h2>
+            <h2 className="detail-section__title">Galería</h2>
             <div className="detail-gallery">
               {pictures.slice(0, 12).map((pic, i) => (
                 <div key={i} className="gallery-item">
                   <img
                     src={pic.jpg?.large_image_url || pic.jpg?.image_url}
-                    alt={`Gallery ${i + 1}`}
+                    alt={`Imagen ${i + 1}`}
                     loading="lazy"
                     onError={(e) => { e.target.src = PLACEHOLDER; }}
                   />
@@ -238,7 +238,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
         {recAnimes.length > 0 && (
           <div className="detail-section detail-section--row">
             <ContentRow
-              title="Related Anime"
+              title="Anime Relacionado"
               emoji="✨"
               data={recAnimes}
               loading={recLoading}

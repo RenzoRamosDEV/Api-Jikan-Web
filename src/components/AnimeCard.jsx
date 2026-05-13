@@ -11,7 +11,7 @@ export default function AnimeCard({ anime, landscape = false, progress = null, o
     anime.image_url ||
     PLACEHOLDER;
 
-  const title = anime.title_english || anime.title || 'Unknown Title';
+  const title = anime.title_english || anime.title || 'Sin título';
   const score = anime.score;
   const genres = anime.genres?.slice(0, 2) || [];
 
@@ -27,7 +27,7 @@ export default function AnimeCard({ anime, landscape = false, progress = null, o
       onClick={handleClick}
       tabIndex={0}
       role="button"
-      aria-label={`View details for ${title}`}
+      aria-label={`Ver detalles de ${title}`}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
       <div className="anime-card__image-wrapper">

@@ -29,7 +29,7 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
     anime?.images?.jpg?.image_url ||
     PLACEHOLDER;
 
-  const title = anime?.title_english || anime?.title || 'Unknown Title';
+  const title = anime?.title_english || anime?.title || 'Sin título';
   const score = anime?.score;
   const year = anime?.year || anime?.aired?.prop?.from?.year;
   const episodes = anime?.episodes;
@@ -87,7 +87,7 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
             key={i}
             className={`hero-carousel__dot ${i === currentIndex ? 'hero-carousel__dot--active' : ''}`}
             onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={`Ir a la diapositiva ${i + 1}`}
           />
         ))}
       </div>
@@ -103,7 +103,7 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
         <div className="hero-carousel__meta">
           {score && <span className="hero-carousel__meta-item">⭐ {score.toFixed(1)}</span>}
           {year && <span className="hero-carousel__meta-item">{year}</span>}
-          {episodes && <span className="hero-carousel__meta-item">{episodes} Episodes</span>}
+          {episodes && <span className="hero-carousel__meta-item">{episodes} Episodios</span>}
           {studio && <span className="hero-carousel__meta-item">{studio}</span>}
         </div>
 
@@ -123,13 +123,13 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
 
         <div className="hero-carousel__actions">
           <button className="btn-primary" onClick={handleMoreInfo}>
-            ▶ Watch Now
+            ▶ Ver Ahora
           </button>
           <button className="btn-glass" onClick={handleToggleList}>
-            {isInList ? '✓ In My List' : '+ Add to List'}
+            {isInList ? '✓ En Mi Lista' : '+ Agregar'}
           </button>
           <button className="btn-text" onClick={handleMoreInfo}>
-            ℹ More Info
+            ℹ Más Info
           </button>
         </div>
       </div>

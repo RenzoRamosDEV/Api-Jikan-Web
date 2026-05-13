@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
-// Cache map outside component — persists for the session
+// Cache map fuera del componente — persiste durante la sesión
 const cache = new Map();
+const CACHE_MAX_SIZE = 50;
 let lastRequestTime = 0;
 
 export function useAnimeData(endpoint) {

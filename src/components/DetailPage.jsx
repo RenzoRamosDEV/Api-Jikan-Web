@@ -28,21 +28,21 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
   if (!anime) {
     return (
       <div className="detail-page detail-page--error">
-        <button className="detail-back-btn" onClick={onBack}>← Back</button>
-        <p>Could not load anime details.</p>
+        <button className="detail-back-btn" onClick={onBack}>← Volver</button>
+        <p>No se pudieron cargar los detalles del anime.</p>
       </div>
     );
   }
 
   const imageUrl = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || PLACEHOLDER;
   const bannerUrl = anime.trailer?.images?.maximum_image_url || imageUrl;
-  const title = anime.title_english || anime.title || 'Unknown';
+  const title = anime.title_english || anime.title || 'Sin título';
   const synopsis = anime.synopsis || '';
   const genres = anime.genres || [];
   const isInList = myList?.some(m => m.mal_id === anime.mal_id);
   const shortSynopsis = synopsis.length > 300 ? synopsis.slice(0, 300) + '…' : synopsis;
 
-  // Map recommendations to anime-like objects
+  // Mapear recomendaciones a objetos tipo anime
   const recAnimes = recommendations?.slice(0, 12).map(r => r.entry) || [];
 
   return (
@@ -54,8 +54,8 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
           style={{ backgroundImage: `url(${bannerUrl})` }}
         />
         <div className="detail-banner__gradient" />
-        <button className="detail-back-btn" onClick={onBack} aria-label="Go back">
-          ← Back
+        <button className="detail-back-btn" onClick={onBack} aria-label="Volver atrás">
+          ← Volver
         </button>
       </div>
 

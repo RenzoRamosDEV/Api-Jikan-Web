@@ -9,9 +9,11 @@ import './App.css';
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'detail'
   const [selectedAnimeId, setSelectedAnimeId] = useState(null);
+  const [navigationHistory, setNavigationHistory] = useState([]);
   const [myList, setMyList] = useLocalStorage('anivision-mylist', []);
 
   function navigateToDetail(id) {
+    setNavigationHistory(prev => [...prev, currentPage]);
     setSelectedAnimeId(id);
     setCurrentPage('detail');
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -20,6 +22,7 @@ export default function App() {
   function navigateHome() {
     setCurrentPage('home');
     setSelectedAnimeId(null);
+    setNavigationHistory([]);
   }
 
   function toggleMyList(anime) {

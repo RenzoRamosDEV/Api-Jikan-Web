@@ -1,0 +1,232 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-primary: #050508;
+  --bg-secondary: #0a0a12;
+  --bg-tertiary: #0f0f1a;
+  --glass-white: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --accent-purple: #7C3AED;
+  --accent-neon: #A855F7;
+  --accent-blue: #3B82F6;
+  --accent-cyan: #06B6D4;
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.35);
+  --glow-purple: rgba(124, 58, 237, 0.4);
+  --glow-blue: rgba(59, 130, 246, 0.3);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== GLASS MIXIN (utility class) ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+              0 0 0 0.5px rgba(255, 255, 255, 0.05) inset,
+              0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes kenBurns {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.12) translate(-2%, -2%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.fade-slide-up {
+  animation: fadeSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ===== FOCUS STATES ===== */
+:focus-visible {
+  outline: 2px solid var(--accent-neon);
+  outline-offset: 2px;
+}
+
+/* ===== GRADIENT TEXT ===== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-neon), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== BUTTON STYLES ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.03);
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.03);
+}
+
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn-text:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ===== GENRE PILL ===== */
+.genre-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}

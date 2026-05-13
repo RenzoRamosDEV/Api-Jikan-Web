@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import DetailPage from './components/DetailPage';
@@ -12,20 +12,20 @@ export default function App() {
   const [navigationHistory, setNavigationHistory] = useState([]);
   const [myList, setMyList] = useLocalStorage('anivision-mylist', []);
 
-  function navigateToDetail(id) {
+  const navigateToDetail = useCallback((id) => {
     setNavigationHistory(prev => [...prev, currentPage]);
     setSelectedAnimeId(id);
     setCurrentPage('detail');
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }
+  }, [currentPage]);
 
-  function navigateHome() {
+  const navigateHome = useCallback(() => {
     setCurrentPage('home');
     setSelectedAnimeId(null);
     setNavigationHistory([]);
-  }
+  }, []);
 
-  function toggleMyList(anime) {
+  const toggleMyList = useCallback((anime) => {
     setMyList(prev => {
       const exists = prev.some(m => m.mal_id === anime.mal_id);
       if (exists) {
@@ -39,7 +39,7 @@ export default function App() {
         genres: anime.genres,
       }];
     });
-  }
+  }, [setMyList]);
 
   return (
     <div className="app">

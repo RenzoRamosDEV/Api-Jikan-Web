@@ -131,7 +131,7 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
             {isInList ? '✓ En Mi Lista' : '+ Agregar'}
           </button>
           <button className="btn-text" onClick={handleMoreInfo}>
-            ℹ Más Info
+            Más Info
           </button>
         </div>
       </div>

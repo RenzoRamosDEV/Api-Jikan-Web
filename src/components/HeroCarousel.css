@@ -13,12 +13,12 @@
   background: var(--bg-primary);
 }
 
-/* Right panel: image occupies the right ~55% */
+/* Right panel: image occupies the right 50% */
 .hero-carousel__image-panel {
   position: absolute;
   top: 0;
   right: 0;
-  width: 62%;
+  width: 50%;
   height: 100%;
   overflow: hidden;
 }
@@ -108,7 +108,7 @@
   box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
-/* Content — left side, full height, vertically centered-bottom */
+/* Content — left side 50% */
 .hero-carousel__content {
   position: relative;
   z-index: 10;
@@ -117,7 +117,6 @@
   justify-content: flex-end;
   padding: 80px 60px 44px;
   width: 50%;
-  max-width: 680px;
   animation: fadeSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
@@ -135,6 +134,7 @@
 .hero-carousel__badge {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   gap: 6px;
   padding: 6px 14px;
   background: rgba(124, 58, 237, 0.25);
@@ -147,6 +147,7 @@
   text-transform: uppercase;
   color: #C084FC;
   margin-bottom: 16px;
+  width: fit-content;
 }
 
 .hero-carousel__title {

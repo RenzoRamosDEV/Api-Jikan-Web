@@ -1,8 +1,13 @@
+import { memo } from 'react';
 import './SkeletonCard.css';
 
-export default function SkeletonCard({ landscape = false }) {
+function SkeletonCard({ landscape = false }) {
   return (
-    <div className={`skeleton-card ${landscape ? 'skeleton-card--landscape' : ''}`}>
+    <div
+      className={`skeleton-card ${landscape ? 'skeleton-card--landscape' : ''}`}
+      aria-busy="true"
+      aria-label="Cargando contenido..."
+    >
       <div className="skeleton-image skeleton-shimmer" />
       <div className="skeleton-content">
         <div className="skeleton-line skeleton-shimmer" style={{ width: '80%', height: '14px' }} />
@@ -11,3 +16,5 @@ export default function SkeletonCard({ landscape = false }) {
     </div>
   );
 }
+
+export default memo(SkeletonCard);

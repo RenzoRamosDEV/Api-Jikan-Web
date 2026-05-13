@@ -2,7 +2,7 @@ import HeroCarousel from '../components/HeroCarousel';
 import ContentRow from '../components/ContentRow';
 import { useAnimeData } from '../hooks/useAnimeData';
 
-// Mock Continue Watching data
+// Datos de ejemplo para "Continuar Viendo"
 const CONTINUE_WATCHING = [
   {
     mal_id: 9001,

@@ -1,0 +1,121 @@
+.anime-card {
+  flex-shrink: 0;
+  width: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  scroll-snap-align: start;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease;
+  background: #0a0a12;
+}
+
+.anime-card--landscape {
+  width: 320px;
+}
+
+.anime-card:hover {
+  transform: scale(1.08) translateY(-8px);
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.6),
+              0 20px 60px rgba(0, 0, 0, 0.8),
+              0 0 40px rgba(124, 58, 237, 0.3);
+  z-index: 10;
+}
+
+.anime-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 310px;
+}
+
+.anime-card--landscape .anime-card__image-wrapper {
+  height: 180px;
+}
+
+.anime-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111122;
+  transition: transform 0.4s ease;
+}
+
+.anime-card:hover .anime-card__image {
+  transform: scale(1.05);
+}
+
+.anime-card__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFD700;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.anime-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 8, 0.95) 0%,
+    rgba(5, 5, 8, 0.4) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.anime-card__bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px;
+}
+
+.anime-card__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.anime-card__genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.anime-card__genres .genre-pill {
+  font-size: 10px;
+  padding: 2px 8px;
+}
+
+.anime-card__progress-bar {
+  margin-top: 8px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.anime-card__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7C3AED, #A855F7);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}

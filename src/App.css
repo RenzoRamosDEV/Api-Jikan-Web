@@ -1,0 +1,8 @@
+.app {
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.app__main {
+  width: 100%;
+}

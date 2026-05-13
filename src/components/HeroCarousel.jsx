@@ -56,29 +56,31 @@ export default function HeroCarousel({ items, onNavigate, myList, onToggleList }
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
-      {/* Background slides */}
-      {items.map((item, i) => {
-        const bg =
-          item?.trailer?.images?.maximum_image_url ||
-          item?.images?.jpg?.large_image_url ||
-          item?.images?.jpg?.image_url ||
-          PLACEHOLDER;
-        return (
-          <div
-            key={item.mal_id || i}
-            className={`hero-carousel__slide ${i === currentIndex ? 'hero-carousel__slide--active' : ''}`}
-          >
+      {/* Right image panel */}
+      <div className="hero-carousel__image-panel">
+        {items.map((item, i) => {
+          const bg =
+            item?.trailer?.images?.maximum_image_url ||
+            item?.images?.jpg?.large_image_url ||
+            item?.images?.jpg?.image_url ||
+            PLACEHOLDER;
+          return (
             <div
-              className="hero-carousel__bg"
-              style={{ backgroundImage: `url(${bg})` }}
-            />
-          </div>
-        );
-      })}
-
-      {/* Gradients */}
-      <div className="hero-carousel__gradient-right" />
-      <div className="hero-carousel__gradient-bottom" />
+              key={item.mal_id || i}
+              className={`hero-carousel__slide ${i === currentIndex ? 'hero-carousel__slide--active' : ''}`}
+            >
+              <div
+                className="hero-carousel__bg"
+                style={{ backgroundImage: `url(${bg})` }}
+              />
+            </div>
+          );
+        })}
+        {/* Fade from left (blends into bg-primary) */}
+        <div className="hero-carousel__fade-left" />
+        {/* Fade from bottom */}
+        <div className="hero-carousel__gradient-bottom" />
+      </div>
 
       {/* Slide Indicators */}
       <div className="hero-carousel__dots">

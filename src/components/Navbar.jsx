@@ -12,7 +12,6 @@ export default function Navbar({ onNavigateHome, currentPage }) {
       onNavigateHome();
     }
   }, [onNavigateHome]);
-  }
 
   return (
     <nav className="navbar">

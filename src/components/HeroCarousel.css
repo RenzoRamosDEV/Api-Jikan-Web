@@ -3,12 +3,24 @@
   width: 100%;
   height: 55vh;
   min-height: 480px;
-  overflow: hidden;
+  display: flex;
+  align-items: stretch;
   background: var(--bg-primary);
+  overflow: hidden;
 }
 
 .hero-carousel--empty {
   background: var(--bg-primary);
+}
+
+/* Right panel: image occupies the right ~55% */
+.hero-carousel__image-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 62%;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* Slides */
@@ -35,38 +47,34 @@
 }
 
 @keyframes kenBurns {
-  from {
-    transform: scale(1) translate(0, 0);
-  }
-  to {
-    transform: scale(1.12) translate(-2%, -2%);
-  }
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.08) translate(-1%, -1%); }
 }
 
-/* Gradients */
-.hero-carousel__gradient-right {
+/* Fade from left — blends image into bg-primary */
+.hero-carousel__fade-left {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(5, 5, 8, 0.85) 0%,
-    rgba(5, 5, 8, 0.5) 40%,
-    rgba(5, 5, 8, 0.1) 70%,
+    var(--bg-primary) 0%,
+    rgba(5, 5, 8, 0.7) 18%,
+    rgba(5, 5, 8, 0.2) 45%,
     transparent 100%
   );
   pointer-events: none;
   z-index: 2;
 }
 
+/* Fade from bottom */
 .hero-carousel__gradient-bottom {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
     var(--bg-primary) 0%,
-    rgba(5, 5, 8, 0.6) 25%,
-    rgba(5, 5, 8, 0.2) 50%,
-    transparent 70%
+    rgba(5, 5, 8, 0.5) 22%,
+    transparent 55%
   );
   pointer-events: none;
   z-index: 2;
@@ -75,11 +83,11 @@
 /* Dots */
 .hero-carousel__dots {
   position: absolute;
-  top: 80px;
+  top: 72px;
   left: 60px;
   display: flex;
   gap: 8px;
-  z-index: 10;
+  z-index: 20;
 }
 
 .hero-carousel__dot {
@@ -100,14 +108,16 @@
   box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
-/* Content */
+/* Content — left side, full height, vertically centered-bottom */
 .hero-carousel__content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 0 60px 40px;
+  position: relative;
   z-index: 10;
-  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 60px 44px;
+  width: 50%;
+  max-width: 680px;
   animation: fadeSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 

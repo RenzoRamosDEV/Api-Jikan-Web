@@ -1,17 +1,16 @@
 import { useState, useCallback } from 'react';
 import './Navbar.css';
 
-const NAV_LINKS = ['Inicio', 'Tendencias', 'Películas', 'Series', 'Mi Lista', 'Buscar'];
+const NAV_LINKS = ['Inicio', 'Anime', 'Mi Lista', 'Buscar'];
 
-export default function Navbar({ onNavigateHome, currentPage }) {
-  const [activeLink, setActiveLink] = useState('Home');
+export default function Navbar({ onNavigateHome, onNavigateAnime, currentPage }) {
+  const [activeLink, setActiveLink] = useState('Inicio');
 
   const handleLinkClick = useCallback((link) => {
     setActiveLink(link);
-    if (link === 'Inicio') {
-      onNavigateHome();
-    }
-  }, [onNavigateHome]);
+    if (link === 'Inicio') onNavigateHome();
+    if (link === 'Anime') onNavigateAnime?.();
+  }, [onNavigateHome, onNavigateAnime]);
 
   return (
     <nav className="navbar">
@@ -27,7 +26,7 @@ export default function Navbar({ onNavigateHome, currentPage }) {
           {NAV_LINKS.map(link => (
             <li key={link}>
               <button
-                className={`navbar__link ${activeLink === link && currentPage === 'home' ? 'navbar__link--active' : ''}`}
+                className={`navbar__link ${activeLink === link ? 'navbar__link--active' : ''}`}
                 onClick={() => handleLinkClick(link)}
               >
                 {link}

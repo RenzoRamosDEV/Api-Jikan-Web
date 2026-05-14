@@ -200,6 +200,7 @@
   margin-bottom: 48px;
 }
 
+
 .detail-section--row {
   padding: 0;
 }
@@ -215,6 +216,12 @@
 .detail-section--row .content-row__scroll-container {
   padding-left: 0;
   padding-right: 0;
+  overflow: visible;
+}
+
+.detail-section--row .content-row__track {
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 .detail-section__title {
@@ -230,7 +237,7 @@
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 800px;
+  max-width: 100%;
 }
 
 .detail-synopsis__toggle {

@@ -20,7 +20,6 @@ export default function ContentRow({
     <section className="content-row">
       <div className="content-row__header">
         <h2 className="content-row__title">
-          {emoji && <span className="content-row__emoji">{emoji}</span>}
           {title}
         </h2>
         <button className="content-row__see-all">Ver todo →</button>

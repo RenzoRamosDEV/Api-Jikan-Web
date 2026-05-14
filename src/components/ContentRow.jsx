@@ -14,6 +14,7 @@ export default function ContentRow({
   landscape = false,
   onNavigate,
   mockData = null,
+  limit = 7,
 }) {
   const items = mockData || data;
   const isEmpty = !loading && !error && (!items || items.length === 0);
@@ -42,7 +43,7 @@ export default function ContentRow({
           {isEmpty && !mockData && (
             <div className="content-row__empty">Sin contenido disponible.</div>
           )}
-          {!loading && items && items.slice(0, 7).map((anime, i) => (
+          {!loading && items && items.slice(0, limit).map((anime, i) => (
             <AnimeCard
               key={anime?.mal_id || i}
               anime={anime}

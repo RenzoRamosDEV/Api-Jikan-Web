@@ -3,14 +3,15 @@ import './Navbar.css';
 
 const NAV_LINKS = ['Inicio', 'Anime', 'Mi Lista', 'Buscar'];
 
-export default function Navbar({ onNavigateHome, onNavigateAnime, currentPage }) {
+export default function Navbar({ onNavigateHome, onNavigateAnime, onNavigateMyList, currentPage }) {
   const [activeLink, setActiveLink] = useState('Inicio');
 
   const handleLinkClick = useCallback((link) => {
     setActiveLink(link);
     if (link === 'Inicio') onNavigateHome();
     if (link === 'Anime') onNavigateAnime?.();
-  }, [onNavigateHome, onNavigateAnime]);
+    if (link === 'Mi Lista') onNavigateMyList?.();
+  }, [onNavigateHome, onNavigateAnime, onNavigateMyList]);
 
   return (
     <nav className="navbar">

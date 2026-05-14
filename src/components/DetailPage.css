@@ -56,17 +56,17 @@
 /* Banner */
 .detail-banner {
   position: relative;
-  height: 55vh;
+  height: 30vh;
   overflow: hidden;
 }
 
 .detail-banner__bg {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
   background-size: cover;
-  background-position: center top;
-  filter: blur(2px) brightness(0.6);
-  transform: scale(1.05);
+  background-position: center;
+  filter: brightness(0.55);
+  transition: opacity 1.5s ease-in-out;
 }
 
 .detail-banner__gradient {
@@ -105,8 +105,8 @@
 /* Main Content */
 .detail-main {
   max-width: 1400px;
-  margin: -120px auto 0;
-  padding: 0 60px 80px;
+  margin: -80px auto 0;
+  padding: 0 16px 80px;
   position: relative;
   z-index: 5;
 }
@@ -114,9 +114,52 @@
 /* Info Card */
 .detail-card {
   display: flex;
-  gap: 40px;
+  flex-direction: column;
+  gap: 0;
   padding: 32px;
   margin-bottom: 40px;
+}
+
+/* ── Fila superior ── */
+.detail-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.detail-card__header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.detail-card__header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.detail-card__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.detail-card__divider {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 24px;
+}
+
+/* ── Fila inferior ── */
+.detail-card__body {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
 }
 
 .detail-card__poster {
@@ -135,31 +178,42 @@
   background: #111122;
 }
 
-.detail-card__info {
-  flex: 1;
-  min-width: 0;
+.detail-card__meta {
+  flex-shrink: 0;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding-right: 32px;
 }
 
+.detail-card__synopsis {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Títulos ── */
 .detail-card__title {
   font-size: 36px;
   font-weight: 800;
   letter-spacing: -1px;
   line-height: 1.1;
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .detail-card__alt-title {
   font-size: 14px;
   color: var(--text-muted);
-  margin-bottom: 20px;
 }
 
+/* ── Stats ── */
 .detail-card__stats {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 24px;
 }
 
 .detail-stat {
@@ -182,13 +236,6 @@
   color: var(--text-primary);
 }
 
-.detail-card__actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
 .detail-card__genres {
   display: flex;
   flex-wrap: wrap;
@@ -198,7 +245,9 @@
 /* Sections */
 .detail-section {
   margin-bottom: 48px;
+  padding: 0 16px;
 }
+
 
 .detail-section--row {
   padding: 0;
@@ -215,6 +264,12 @@
 .detail-section--row .content-row__scroll-container {
   padding-left: 0;
   padding-right: 0;
+  overflow: visible;
+}
+
+.detail-section--row .content-row__track {
+  flex-wrap: wrap;
+  padding: 0;
 }
 
 .detail-section__title {
@@ -230,7 +285,7 @@
   font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 800px;
+  max-width: 100%;
 }
 
 .detail-synopsis__toggle {
@@ -327,20 +382,13 @@
 
 /* Characters */
 .detail-characters {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scrollbar-width: none;
-}
-
-.detail-characters::-webkit-scrollbar {
-  display: none;
 }
 
 .char-card {
-  flex-shrink: 0;
-  width: 160px;
+  width: 100%;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -382,15 +430,17 @@
 
 /* Gallery */
 .detail-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
 .gallery-item {
-  border-radius: 10px;
+  width: 220px;
+  border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/3;
   background: #111122;
 }
 

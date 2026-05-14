@@ -10,19 +10,18 @@ export default function ContentRow({
   data,
   loading,
   error,
+  onRetry,
   landscape = false,
   onNavigate,
   mockData = null,
 }) {
   const items = mockData || data;
+  const isEmpty = !loading && !error && (!items || items.length === 0);
 
   return (
     <section className="content-row">
       <div className="content-row__header">
-        <h2 className="content-row__title">
-          {emoji && <span className="content-row__emoji">{emoji}</span>}
-          {title}
-        </h2>
+        <h2 className="content-row__title">{title}</h2>
         <button className="content-row__see-all">Ver todo →</button>
       </div>
 
@@ -33,8 +32,16 @@ export default function ContentRow({
           ))}
           {error && (
             <div className="content-row__error">
-              Error al cargar: {error}
+              <span>No se pudo cargar esta sección.</span>
+              {onRetry && (
+                <button className="content-row__retry" onClick={onRetry}>
+                  Reintentar
+                </button>
+              )}
             </div>
+          )}
+          {isEmpty && !mockData && (
+            <div className="content-row__empty">Sin contenido disponible.</div>
           )}
           {!loading && items && items.map((anime, i) => (
             <AnimeCard

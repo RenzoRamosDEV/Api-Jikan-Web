@@ -7,6 +7,7 @@ const PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9I
 
 export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
   const [synopsisExpanded, setSynopsisExpanded] = useState(false);
+  const [charactersExpanded, setCharactersExpanded] = useState(false);
 
   const { data: anime, loading: animeLoading } = useAnimeData(animeId ? `/anime/${animeId}/full` : null);
   const { data: episodes } = useAnimeData(animeId ? `/anime/${animeId}/episodes` : null);
@@ -135,7 +136,6 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
               <button className="btn-glass" onClick={() => onToggleList && onToggleList(anime)}>
                 {isInList ? '✓ En Mi Lista' : '+ Mi Lista'}
               </button>
-              <button className="btn-glass">↓ Descargar</button>
             </div>
 
             {/* Genres */}
@@ -193,7 +193,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
           <section className="detail-section">
             <h2 className="detail-section__title">Personajes y Actores de Voz</h2>
             <div className="detail-characters">
-              {characters.slice(0, 12).map(c => (
+              {(charactersExpanded ? characters : characters.slice(0, 7)).map(c => (
                 <div key={c.character?.mal_id} className="char-card glass">
                   <img
                     src={c.character?.images?.jpg?.image_url || PLACEHOLDER}
@@ -212,6 +212,14 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
                 </div>
               ))}
             </div>
+            {characters.length > 7 && (
+              <button
+                className="detail-synopsis__toggle"
+                onClick={() => setCharactersExpanded(e => !e)}
+              >
+                {charactersExpanded ? 'Ver menos ↑' : `Ver todos (${characters.length}) ↓`}
+              </button>
+            )}
           </section>
         )}
 
@@ -220,7 +228,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
           <section className="detail-section">
             <h2 className="detail-section__title">Galería</h2>
             <div className="detail-gallery">
-              {pictures.slice(0, 12).map((pic, i) => (
+              {pictures.slice(0, 5).map((pic, i) => (
                 <div key={i} className="gallery-item">
                   <img
                     src={pic.jpg?.large_image_url || pic.jpg?.image_url}

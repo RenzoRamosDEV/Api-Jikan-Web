@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAnimeData } from '../hooks/useAnimeData';
 import ContentRow from './ContentRow';
 import './DetailPage.css';
@@ -8,11 +8,20 @@ const PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9I
 export default function DetailPage({ animeId, onBack, onNavigate, myList, onToggleList }) {
   const [synopsisExpanded, setSynopsisExpanded] = useState(false);
   const [charactersExpanded, setCharactersExpanded] = useState(false);
+  const [bannerIndex, setBannerIndex] = useState(0);
 
   const { data: anime, loading: animeLoading } = useAnimeData(animeId ? `/anime/${animeId}/full` : null);
-const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/characters` : null);
+  const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/characters` : null);
   const { data: pictures } = useAnimeData(animeId ? `/anime/${animeId}/pictures` : null);
   const { data: recommendations, loading: recLoading } = useAnimeData(animeId ? `/anime/${animeId}/recommendations` : null);
+
+  useEffect(() => {
+    if (!pictures || pictures.length <= 1) return;
+    const interval = setInterval(() => {
+      setBannerIndex(i => (i + 1) % pictures.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [pictures]);
 
   if (animeLoading) {
     return (
@@ -35,7 +44,7 @@ const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/character
   }
 
   const imageUrl = anime.images?.jpg?.large_image_url || anime.images?.jpg?.image_url || PLACEHOLDER;
-  const bannerUrl = anime.trailer?.images?.maximum_image_url || imageUrl;
+  const bannerUrl = pictures?.[bannerIndex]?.jpg?.large_image_url || anime.trailer?.images?.maximum_image_url || imageUrl;
   const title = anime.title_english || anime.title || 'Sin título';
   const synopsis = anime.synopsis || '';
   const genres = anime.genres || [];
@@ -49,10 +58,16 @@ const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/character
     <div className="detail-page">
       {/* Banner */}
       <div className="detail-banner">
-        <div
-          className="detail-banner__bg"
-          style={{ backgroundImage: `url(${bannerUrl})` }}
-        />
+        {(pictures && pictures.length > 0 ? pictures : [{ jpg: { large_image_url: bannerUrl } }]).map((pic, i) => (
+          <div
+            key={i}
+            className="detail-banner__bg"
+            style={{
+              backgroundImage: `url(${pic.jpg?.large_image_url || bannerUrl})`,
+              opacity: i === bannerIndex ? 1 : 0,
+            }}
+          />
+        ))}
         <div className="detail-banner__gradient" />
         <button className="detail-back-btn" onClick={onBack} aria-label="Volver atrás">
           ← Volver

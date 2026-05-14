@@ -42,27 +42,15 @@
 }
 
 .content-row__scroll-container {
-  display: flex;
-  justify-content: center;
-  overflow-x: auto;
-  overflow-y: visible;
+  overflow: hidden;
   padding: 40px 0 20px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-snap-type: x proximity;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-.content-row__scroll-container::-webkit-scrollbar {
-  display: none;
 }
 
 .content-row__track {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
-  width: max-content;
-  overflow-y: visible;
   padding: 0 60px;
 }
 

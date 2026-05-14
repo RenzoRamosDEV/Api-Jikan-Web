@@ -119,3 +119,21 @@
   border-radius: 2px;
   transition: width 0.3s ease;
 }
+
+@media (max-width: 600px) {
+  .anime-card {
+    width: 150px;
+  }
+
+  .anime-card--landscape {
+    width: 220px;
+  }
+
+  .anime-card__image-wrapper {
+    height: 210px;
+  }
+
+  .anime-card--landscape .anime-card__image-wrapper {
+    height: 130px;
+  }
+}

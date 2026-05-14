@@ -11,6 +11,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'anime' | 'detail'
   const [selectedAnimeId, setSelectedAnimeId] = useState(null);
   const [navigationHistory, setNavigationHistory] = useState([]);
+  const [animeListPage, setAnimeListPage] = useState(1);
   const [myList, setMyList] = useLocalStorage('anivision-mylist', []);
 
   const navigateToDetail = useCallback((id) => {
@@ -25,6 +26,14 @@ export default function App() {
     setSelectedAnimeId(null);
     setNavigationHistory([]);
   }, []);
+
+  const navigateBack = useCallback(() => {
+    const prev = navigationHistory[navigationHistory.length - 1] || 'home';
+    setNavigationHistory(h => h.slice(0, -1));
+    setCurrentPage(prev);
+    if (prev !== 'detail') setSelectedAnimeId(null);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [navigationHistory]);
 
   const navigateToAnime = useCallback(() => {
     setCurrentPage('anime');
@@ -60,12 +69,13 @@ export default function App() {
           />
         )}
         {currentPage === 'anime' && (
-          <AnimePage onNavigate={navigateToDetail} />
+          <AnimePage onNavigate={navigateToDetail} page={animeListPage} onPageChange={setAnimeListPage} />
         )}
         {currentPage === 'detail' && (
           <DetailPage
             animeId={selectedAnimeId}
-            onBack={navigateHome}
+            onBack={navigateBack}
+            onNavigate={navigateToDetail}
             myList={myList}
             onToggleList={toggleMyList}
           />

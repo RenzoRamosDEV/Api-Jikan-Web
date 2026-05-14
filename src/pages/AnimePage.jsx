@@ -236,50 +236,6 @@ export default function AnimePage({ onNavigate }) {
           </select>
         </div>
 
-        <div className="anime-filter__divider" />
-
-        {/* Puntuación mínima */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">PUNTUACIÓN MÍNIMA</label>
-          <div className="anime-filter__score-row">
-            <span className="anime-filter__score-val">{filters.minScore > 0 ? filters.minScore.toFixed(1) : 'Cualquiera'}</span>
-          </div>
-          <input
-            type="range" min="0" max="9" step="0.5"
-            value={filters.minScore}
-            onChange={e => setFilters(f => ({ ...f, minScore: Number(e.target.value) }))}
-            className="anime-filter__range-single"
-          />
-          <div className="anime-filter__range-labels">
-            <span>0</span><span>9</span>
-          </div>
-        </div>
-
-        {/* Año */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">AÑO</label>
-          <div className="anime-filter__year-labels">
-            <span className="anime-filter__year-badge">{filters.yearMin}</span>
-            <span className="anime-filter__year-badge">{filters.yearMax}</span>
-          </div>
-          <div className="anime-filter__range-track">
-            <div
-              className="anime-filter__range-fill"
-              style={{
-                left: `${((filters.yearMin - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 100}%`,
-                right: `${100 - ((filters.yearMax - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 100}%`,
-              }}
-            />
-            <input type="range" min={MIN_YEAR} max={MAX_YEAR} value={filters.yearMin}
-              onChange={e => setFilters(f => ({ ...f, yearMin: Math.min(Number(e.target.value), f.yearMax - 1) }))}
-              className="anime-filter__range"
-            />
-            <input type="range" min={MIN_YEAR} max={MAX_YEAR} value={filters.yearMax}
-              onChange={e => setFilters(f => ({ ...f, yearMax: Math.max(Number(e.target.value), f.yearMin + 1) }))}
-              className="anime-filter__range"
-            />
-          </div>
-        </div>
 
         <div className="anime-filter__divider" />
 

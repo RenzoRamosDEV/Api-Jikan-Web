@@ -76,14 +76,17 @@ const defaultFilters = {
   ordenar: 'score',
 };
 
-export default function AnimePage({ onNavigate }) {
+export default function AnimePage({ onNavigate, page = 1, onPageChange }) {
   const [filters, setFilters] = useState(defaultFilters);
   const [activeFilters, setActiveFilters] = useState(null);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+
+  const setPage = useCallback((p) => {
+    onPageChange?.(p);
+  }, [onPageChange]);
 
   const buildUrl = useCallback((f, p) => {
     const params = new URLSearchParams();
@@ -118,7 +121,7 @@ export default function AnimePage({ onNavigate }) {
     }
   }, [buildUrl]);
 
-  useEffect(() => { fetchPage(null, 1); }, []);
+  useEffect(() => { fetchPage(null, page); }, []);
 
   const handleSearch = useCallback(() => {
     setActiveFilters(filters);
@@ -173,38 +176,6 @@ export default function AnimePage({ onNavigate }) {
               onChange={set('q')}
               onKeyDown={e => e.key === 'Enter' && handleSearch()}
             />
-          </div>
-        </div>
-
-        <div className="anime-filter__divider" />
-
-        {/* Tipo */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">TIPO</label>
-          <div className="anime-filter__chips">
-            {TIPOS.map(t => (
-              <button
-                key={t.value}
-                className={`anime-filter__chip ${filters.tipo === t.value ? 'anime-filter__chip--active' : ''}`}
-                onClick={() => setFilters(f => ({ ...f, tipo: f.tipo === t.value ? '' : t.value }))}
-              >{t.label}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className="anime-filter__divider" />
-
-        {/* Estado */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">ESTADO</label>
-          <div className="anime-filter__chips">
-            {ESTADOS.map(e => (
-              <button
-                key={e.value}
-                className={`anime-filter__chip ${filters.estado === e.value ? 'anime-filter__chip--active' : ''}`}
-                onClick={() => setFilters(f => ({ ...f, estado: f.estado === e.value ? '' : e.value }))}
-              >{e.label}</button>
-            ))}
           </div>
         </div>
 

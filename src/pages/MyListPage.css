@@ -1,0 +1,91 @@
+.mylist-page {
+  padding: 100px 60px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.mylist-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.mylist-page__header-left {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.mylist-page__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.mylist-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.mylist-btn:hover { opacity: 0.8; }
+
+.mylist-btn--export {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: var(--accent-neon);
+}
+
+.mylist-btn--import {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.mylist-page__title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.mylist-page__count {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.mylist-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.mylist-page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 0;
+  gap: 12px;
+}
+
+.mylist-page__empty-icon {
+  font-size: 48px;
+}
+
+.mylist-page__empty-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.mylist-page__empty-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+}

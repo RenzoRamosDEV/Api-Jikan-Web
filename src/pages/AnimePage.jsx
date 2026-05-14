@@ -181,38 +181,6 @@ export default function AnimePage({ onNavigate, page = 1, onPageChange }) {
 
         <div className="anime-filter__divider" />
 
-        {/* Tipo */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">TIPO</label>
-          <div className="anime-filter__chips">
-            {TIPOS.map(t => (
-              <button
-                key={t.value}
-                className={`anime-filter__chip ${filters.tipo === t.value ? 'anime-filter__chip--active' : ''}`}
-                onClick={() => setFilters(f => ({ ...f, tipo: f.tipo === t.value ? '' : t.value }))}
-              >{t.label}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className="anime-filter__divider" />
-
-        {/* Estado */}
-        <div className="anime-filter">
-          <label className="anime-filter__label">ESTADO</label>
-          <div className="anime-filter__chips">
-            {ESTADOS.map(e => (
-              <button
-                key={e.value}
-                className={`anime-filter__chip ${filters.estado === e.value ? 'anime-filter__chip--active' : ''}`}
-                onClick={() => setFilters(f => ({ ...f, estado: f.estado === e.value ? '' : e.value }))}
-              >{e.label}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className="anime-filter__divider" />
-
         {/* Género */}
         <div className="anime-filter">
           <label className="anime-filter__label">GÉNERO</label>

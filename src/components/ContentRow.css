@@ -42,23 +42,16 @@
 }
 
 .content-row__scroll-container {
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 40px 60px 20px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-snap-type: x mandatory;
-}
-
-.content-row__scroll-container::-webkit-scrollbar {
-  display: none;
+  overflow: hidden;
+  padding: 40px 0 20px;
 }
 
 .content-row__track {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
-  width: max-content;
-  overflow-y: visible;
+  padding: 0 60px;
 }
 
 .content-row__error {
@@ -90,4 +83,14 @@
   color: var(--text-muted);
   font-size: 14px;
   padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .content-row__header {
+    padding: 0 20px;
+  }
+
+  .content-row__track {
+    padding: 0 20px;
+  }
 }

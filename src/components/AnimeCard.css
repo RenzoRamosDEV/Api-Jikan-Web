@@ -1,5 +1,5 @@
 .anime-card {
-  flex-shrink: 0;
+  flex-shrink: 1;
   width: 220px;
   border-radius: 16px;
   overflow: hidden;
@@ -17,9 +17,7 @@
 
 .anime-card:hover {
   transform: scale(1.08) translateY(-8px);
-  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.6),
-              0 20px 60px rgba(0, 0, 0, 0.8),
-              0 0 40px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
   z-index: 10;
 }
 
@@ -118,4 +116,22 @@
   background: linear-gradient(90deg, #7C3AED, #A855F7);
   border-radius: 2px;
   transition: width 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .anime-card {
+    width: 150px;
+  }
+
+  .anime-card--landscape {
+    width: 220px;
+  }
+
+  .anime-card__image-wrapper {
+    height: 210px;
+  }
+
+  .anime-card--landscape .anime-card__image-wrapper {
+    height: 130px;
+  }
 }

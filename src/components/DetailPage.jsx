@@ -5,13 +5,12 @@ import './DetailPage.css';
 
 const PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjU2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExMTIyIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJJbnRlcixzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjNDQ0NDY2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5ObyBJbWFnZTwvdGV4dD48L3N2Zz4=';
 
-export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
+export default function DetailPage({ animeId, onBack, onNavigate, myList, onToggleList }) {
   const [synopsisExpanded, setSynopsisExpanded] = useState(false);
   const [charactersExpanded, setCharactersExpanded] = useState(false);
 
   const { data: anime, loading: animeLoading } = useAnimeData(animeId ? `/anime/${animeId}/full` : null);
-  const { data: episodes } = useAnimeData(animeId ? `/anime/${animeId}/episodes` : null);
-  const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/characters` : null);
+const { data: characters } = useAnimeData(animeId ? `/anime/${animeId}/characters` : null);
   const { data: pictures } = useAnimeData(animeId ? `/anime/${animeId}/pictures` : null);
   const { data: recommendations, loading: recLoading } = useAnimeData(animeId ? `/anime/${animeId}/recommendations` : null);
 
@@ -44,7 +43,7 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
   const shortSynopsis = synopsis.length > 300 ? synopsis.slice(0, 300) + '…' : synopsis;
 
   // Mapear recomendaciones a objetos tipo anime
-  const recAnimes = recommendations?.slice(0, 12).map(r => r.entry) || [];
+  const recAnimes = recommendations?.slice(0, 10).map(r => r.entry) || [];
 
   return (
     <div className="detail-page">
@@ -167,26 +166,6 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
           </section>
         )}
 
-        {/* Episodes */}
-        {episodes && episodes.length > 0 && (
-          <section className="detail-section">
-            <h2 className="detail-section__title">Episodios</h2>
-            <div className="detail-episodes">
-              {episodes.slice(0, 20).map(ep => (
-                <div key={ep.mal_id} className="episode-card glass">
-                  <div className="episode-card__num">{ep.episode_id || ep.mal_id}</div>
-                  <div className="episode-card__info">
-                    <p className="episode-card__title">{ep.title || `Episodio ${ep.episode_id}`}</p>
-                    {ep.aired && (
-                      <p className="episode-card__date">{new Date(ep.aired).toLocaleDateString('es-ES')}</p>
-                    )}
-                  </div>
-                  <button className="episode-card__play">▶</button>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* Characters */}
         {characters && characters.length > 0 && (
@@ -250,6 +229,8 @@ export default function DetailPage({ animeId, onBack, myList, onToggleList }) {
               emoji="✨"
               data={recAnimes}
               loading={recLoading}
+              limit={10}
+              onNavigate={onNavigate}
             />
           </div>
         )}

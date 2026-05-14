@@ -48,7 +48,6 @@
 
 .content-row__track {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
   padding: 0 60px;

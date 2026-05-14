@@ -327,20 +327,13 @@
 
 /* Characters */
 .detail-characters {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scrollbar-width: none;
-}
-
-.detail-characters::-webkit-scrollbar {
-  display: none;
 }
 
 .char-card {
-  flex-shrink: 0;
-  width: 160px;
+  width: 100%;
   border-radius: 14px;
   overflow: hidden;
 }
@@ -382,15 +375,17 @@
 
 /* Gallery */
 .detail-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
 .gallery-item {
-  border-radius: 10px;
+  width: 220px;
+  border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/3;
   background: #111122;
 }
 

@@ -76,14 +76,17 @@ const defaultFilters = {
   ordenar: 'score',
 };
 
-export default function AnimePage({ onNavigate }) {
+export default function AnimePage({ onNavigate, page = 1, onPageChange }) {
   const [filters, setFilters] = useState(defaultFilters);
   const [activeFilters, setActiveFilters] = useState(null);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+
+  const setPage = useCallback((p) => {
+    onPageChange?.(p);
+  }, [onPageChange]);
 
   const buildUrl = useCallback((f, p) => {
     const params = new URLSearchParams();
@@ -118,7 +121,7 @@ export default function AnimePage({ onNavigate }) {
     }
   }, [buildUrl]);
 
-  useEffect(() => { fetchPage(null, 1); }, []);
+  useEffect(() => { fetchPage(null, page); }, []);
 
   const handleSearch = useCallback(() => {
     setActiveFilters(filters);

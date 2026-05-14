@@ -22,7 +22,6 @@ export default function ContentRow({
     <section className="content-row">
       <div className="content-row__header">
         <h2 className="content-row__title">{title}</h2>
-        <button className="content-row__see-all">Ver todo →</button>
       </div>
 
       <div className="content-row__scroll-container">
@@ -43,7 +42,7 @@ export default function ContentRow({
           {isEmpty && !mockData && (
             <div className="content-row__empty">Sin contenido disponible.</div>
           )}
-          {!loading && items && items.slice(0, 10).map((anime, i) => (
+          {!loading && items && items.slice(0, 7).map((anime, i) => (
             <AnimeCard
               key={anime?.mal_id || i}
               anime={anime}

@@ -11,9 +11,10 @@
 .content-row__header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  position: relative;
   padding: 0 60px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .content-row__title {
@@ -24,6 +25,8 @@
 }
 
 .content-row__see-all {
+  position: absolute;
+  right: 60px;
   background: none;
   border: none;
   color: var(--accent-neon);
@@ -48,7 +51,6 @@
 
 .content-row__track {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
   padding: 0 60px;
@@ -88,6 +90,10 @@
 @media (max-width: 600px) {
   .content-row__header {
     padding: 0 20px;
+  }
+
+  .content-row__see-all {
+    right: 20px;
   }
 
   .content-row__track {

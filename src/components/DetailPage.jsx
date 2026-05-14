@@ -8,6 +8,7 @@ const PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9I
 export default function DetailPage({ animeId, onBack, onNavigate, myList, onToggleList }) {
   const [synopsisExpanded, setSynopsisExpanded] = useState(false);
   const [charactersExpanded, setCharactersExpanded] = useState(false);
+  const CHARS_INITIAL = 8;
   const [bannerIndex, setBannerIndex] = useState(0);
 
   const { data: anime, loading: animeLoading } = useAnimeData(animeId ? `/anime/${animeId}/full` : null);
@@ -78,22 +79,45 @@ export default function DetailPage({ animeId, onBack, onNavigate, myList, onTogg
       <div className="detail-main">
         {/* Info Card */}
         <div className="detail-card glass">
-          <div className="detail-card__poster">
-            <img
-              src={imageUrl}
-              alt={title}
-              loading="lazy"
-              onError={(e) => { e.target.src = PLACEHOLDER; }}
-            />
+          {/* Fila superior: título + stats clave + géneros + botón */}
+          <div className="detail-card__header">
+            <div className="detail-card__header-left">
+              <h1 className="detail-card__title">{title}</h1>
+              {anime.title !== title && (
+                <p className="detail-card__alt-title">{anime.title}</p>
+              )}
+            </div>
+            <div className="detail-card__header-right">
+              <div className="detail-card__header-actions">
+                {genres.length > 0 && (
+                  <div className="detail-card__genres">
+                    {genres.map(g => (
+                      <span key={g.mal_id} className="genre-pill">{g.name}</span>
+                    ))}
+                  </div>
+                )}
+                <button className="btn-glass" onClick={() => onToggleList && onToggleList(anime)}>
+                  {isInList ? '✓ En Mi Lista' : '+ Mi Lista'}
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div className="detail-card__info">
-            <h1 className="detail-card__title">{title}</h1>
-            {anime.title !== title && (
-              <p className="detail-card__alt-title">{anime.title}</p>
-            )}
+          {/* Separador */}
+          <div className="detail-card__divider" />
 
-            <div className="detail-card__stats">
+          {/* Fila inferior: póster | stats extra | sinopsis */}
+          <div className="detail-card__body">
+            <div className="detail-card__poster">
+              <img
+                src={imageUrl}
+                alt={title}
+                loading="lazy"
+                onError={(e) => { e.target.src = PLACEHOLDER; }}
+              />
+            </div>
+
+            <div className="detail-card__meta">
               {anime.score && (
                 <div className="detail-stat">
                   <span className="detail-stat__label">Puntuación</span>
@@ -112,12 +136,6 @@ export default function DetailPage({ animeId, onBack, onNavigate, myList, onTogg
                   <span className="detail-stat__value">{anime.year || anime.aired?.prop?.from?.year}</span>
                 </div>
               )}
-              {anime.type && (
-                <div className="detail-stat">
-                  <span className="detail-stat__label">Tipo</span>
-                  <span className="detail-stat__value">{anime.type}</span>
-                </div>
-              )}
               {anime.episodes && (
                 <div className="detail-stat">
                   <span className="detail-stat__label">Episodios</span>
@@ -130,56 +148,16 @@ export default function DetailPage({ animeId, onBack, onNavigate, myList, onTogg
                   <span className="detail-stat__value">{anime.studios[0].name}</span>
                 </div>
               )}
-              {anime.source && (
-                <div className="detail-stat">
-                  <span className="detail-stat__label">Fuente</span>
-                  <span className="detail-stat__value">{anime.source}</span>
-                </div>
-              )}
-              {anime.status && (
-                <div className="detail-stat">
-                  <span className="detail-stat__label">Estado</span>
-                  <span className="detail-stat__value">{anime.status}</span>
-                </div>
-              )}
             </div>
 
-            {/* Action Buttons */}
-            <div className="detail-card__actions">
-              <button className="btn-primary">▶ Ver Ahora</button>
-              <button className="btn-glass" onClick={() => onToggleList && onToggleList(anime)}>
-                {isInList ? '✓ En Mi Lista' : '+ Mi Lista'}
-              </button>
-            </div>
-
-            {/* Genres */}
-            {genres.length > 0 && (
-              <div className="detail-card__genres">
-                {genres.map(g => (
-                  <span key={g.mal_id} className="genre-pill">{g.name}</span>
-                ))}
+            {synopsis && (
+              <div className="detail-card__synopsis">
+                <h2 className="detail-section__title">Sinopsis</h2>
+                <p className="detail-synopsis">{synopsis}</p>
               </div>
             )}
           </div>
         </div>
-
-        {/* Synopsis */}
-        {synopsis && (
-          <section className="detail-section">
-            <h2 className="detail-section__title">Sinopsis</h2>
-            <p className="detail-synopsis">
-              {synopsisExpanded ? synopsis : shortSynopsis}
-            </p>
-            {synopsis.length > 300 && (
-              <button
-                className="detail-synopsis__toggle"
-                onClick={() => setSynopsisExpanded(e => !e)}
-              >
-                {synopsisExpanded ? 'Ver menos ↑' : 'Ver más ↓'}
-              </button>
-            )}
-          </section>
-        )}
 
 
         {/* Characters */}
@@ -187,7 +165,7 @@ export default function DetailPage({ animeId, onBack, onNavigate, myList, onTogg
           <section className="detail-section">
             <h2 className="detail-section__title">Personajes y Actores de Voz</h2>
             <div className="detail-characters">
-              {(charactersExpanded ? characters : characters.slice(0, 7)).map(c => (
+              {(charactersExpanded ? characters : characters.slice(0, CHARS_INITIAL)).map(c => (
                 <div key={c.character?.mal_id} className="char-card glass">
                   <img
                     src={c.character?.images?.jpg?.image_url || PLACEHOLDER}
@@ -206,7 +184,7 @@ export default function DetailPage({ animeId, onBack, onNavigate, myList, onTogg
                 </div>
               ))}
             </div>
-            {characters.length > 7 && (
+            {characters.length > CHARS_INITIAL && (
               <button
                 className="detail-synopsis__toggle"
                 onClick={() => setCharactersExpanded(e => !e)}

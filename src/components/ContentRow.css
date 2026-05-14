@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 60px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .content-row__title {
@@ -48,7 +48,7 @@
 
 .content-row__track {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 14px;
   padding: 0 60px;
 }

@@ -1,13 +1,14 @@
 import { useState, useCallback } from 'react';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
+import AnimePage from './pages/AnimePage';
 import DetailPage from './components/DetailPage';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import './pages/HomePage.css';
 import './App.css';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'detail'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'anime' | 'detail'
   const [selectedAnimeId, setSelectedAnimeId] = useState(null);
   const [navigationHistory, setNavigationHistory] = useState([]);
   const [myList, setMyList] = useLocalStorage('anivision-mylist', []);
@@ -23,6 +24,11 @@ export default function App() {
     setCurrentPage('home');
     setSelectedAnimeId(null);
     setNavigationHistory([]);
+  }, []);
+
+  const navigateToAnime = useCallback(() => {
+    setCurrentPage('anime');
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
 
   const toggleMyList = useCallback((anime) => {
@@ -43,7 +49,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar onNavigateHome={navigateHome} currentPage={currentPage} />
+      <Navbar onNavigateHome={navigateHome} onNavigateAnime={navigateToAnime} currentPage={currentPage} />
 
       <main className="app__main">
         {currentPage === 'home' && (
@@ -52,6 +58,9 @@ export default function App() {
             myList={myList}
             onToggleList={toggleMyList}
           />
+        )}
+        {currentPage === 'anime' && (
+          <AnimePage onNavigate={navigateToDetail} />
         )}
         {currentPage === 'detail' && (
           <DetailPage

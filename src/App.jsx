@@ -24,6 +24,7 @@ export default function App() {
   const [navigationHistory, setNavigationHistory] = useState([]);
   const [animeListPage, setAnimeListPage] = useLocalStorage('anivision-animepage', 1);
   const [myList, setMyList] = useLocalStorage('anivision-mylist', []);
+  const [notifCount, setNotifCount] = useState(0);
 
   // Sincronizar cuando el usuario usa los botones atrás/adelante del navegador
   useEffect(() => {
@@ -76,6 +77,7 @@ export default function App() {
   const toggleMyList = useCallback((anime) => {
     setMyList(prev => {
       const exists = prev.some(m => m.mal_id === anime.mal_id);
+      if (!exists) setNotifCount(n => n + 1);
       if (exists) return prev.filter(m => m.mal_id !== anime.mal_id);
       return [...prev, {
         mal_id: anime.mal_id,
@@ -91,7 +93,15 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar onNavigateHome={navigateHome} onNavigateAnime={navigateToAnime} onNavigateMyList={navigateToMyList} currentPage={page} />
+      <Navbar
+        onNavigateHome={navigateHome}
+        onNavigateAnime={navigateToAnime}
+        onNavigateMyList={navigateToMyList}
+        currentPage={page}
+        notifCount={notifCount}
+        onClearNotif={() => setNotifCount(0)}
+        onNavigateDetail={navigateToDetail}
+      />
 
       <main className="app__main">
         {page === 'home' && (

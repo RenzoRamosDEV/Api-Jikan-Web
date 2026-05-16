@@ -9,16 +9,28 @@ export default function Navbar({
   onNavigateMyList,
   onNavigateDetail,
   currentPage,
-  notifCount = 0,
+  notifications = [],
   onClearNotif,
 }) {
   const [activeLink, setActiveLink] = useState('Inicio');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const notifRef = useRef(null);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const inputRef = useRef(null);
   const debounceRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (notifRef.current && !notifRef.current.contains(e.target)) {
+        setNotifOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLinkClick = useCallback((link) => {
     setActiveLink(link);
@@ -137,19 +149,47 @@ export default function Navbar({
           )}
 
           {/* Notifications */}
-          <button
-            className="navbar__icon-btn navbar__notif-btn"
-            aria-label="Notificaciones"
-            onClick={onClearNotif}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-            </svg>
-            {notifCount > 0 && (
-              <span className="navbar__notif-badge">{notifCount > 99 ? '99+' : notifCount}</span>
+          <div className="navbar__notif-wrap" ref={notifRef}>
+            <button
+              className="navbar__icon-btn navbar__notif-btn"
+              aria-label="Notificaciones"
+              onClick={() => setNotifOpen(o => !o)}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              {notifications.length > 0 && (
+                <span className="navbar__notif-badge">{notifications.length > 99 ? '99+' : notifications.length}</span>
+              )}
+            </button>
+
+            {notifOpen && (
+              <div className="navbar__notif-dropdown">
+                <div className="navbar__notif-header">
+                  <span>Notificaciones</span>
+                  {notifications.length > 0 && (
+                    <button className="navbar__notif-clear" onClick={() => { onClearNotif(); setNotifOpen(false); }}>
+                      Limpiar
+                    </button>
+                  )}
+                </div>
+                {notifications.length === 0 ? (
+                  <div className="navbar__notif-empty">Sin notificaciones</div>
+                ) : (
+                  notifications.map(n => (
+                    <div key={`${n.mal_id}-${n.time}`} className="navbar__notif-item">
+                      <img src={n.image} alt={n.title} className="navbar__notif-img" />
+                      <div className="navbar__notif-info">
+                        <span className="navbar__notif-text">Añadido a Mi Lista</span>
+                        <span className="navbar__notif-title">{n.title}</span>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             )}
-          </button>
+          </div>
 
           <button className="navbar__profile" aria-label="Perfil">
             <span>A</span>

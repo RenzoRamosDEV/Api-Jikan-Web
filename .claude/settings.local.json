@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.jikan.moe)",
+      "WebSearch",
+      "WebFetch(domain:docs.api.jikan.moe)",
+      "WebFetch(domain:jikan-me.github.io)",
+      "WebFetch(domain:docs.jikan.moe)"
+    ]
+  }
+}

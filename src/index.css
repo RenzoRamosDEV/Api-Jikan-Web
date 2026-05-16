@@ -5,14 +5,14 @@
   --bg-tertiary: #0f0f1a;
   --glass-white: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.10);
-  --accent-purple: #7C3AED;
-  --accent-neon: #A855F7;
+  --accent-purple: #EA580C;
+  --accent-neon: #F97316;
   --accent-blue: #3B82F6;
   --accent-cyan: #06B6D4;
   --text-primary: #FFFFFF;
   --text-secondary: rgba(255, 255, 255, 0.65);
   --text-muted: rgba(255, 255, 255, 0.35);
-  --glow-purple: rgba(124, 58, 237, 0.4);
+  --glow-purple: rgba(234, 88, 12, 0.4);
   --glow-blue: rgba(59, 130, 246, 0.3);
   /* Transiciones */
   --transition-fast: 0.15s ease;

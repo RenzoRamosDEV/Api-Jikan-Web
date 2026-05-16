@@ -79,8 +79,7 @@ export default function Navbar({
     <nav className="navbar">
       <div className="navbar__inner">
         <button className="navbar__logo" onClick={onNavigateHome} aria-label="Go to home">
-          <span className="navbar__logo-icon">⬡</span>
-          <span className="navbar__logo-text gradient-text">AniVision</span>
+          <span className="navbar__logo-text gradient-text">AnimeRnz</span>
         </button>
 
         <ul className="navbar__links">

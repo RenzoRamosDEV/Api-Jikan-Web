@@ -104,7 +104,7 @@
 .hero-carousel__dot--active {
   width: 24px;
   border-radius: 3px;
-  background: linear-gradient(90deg, #7C3AED, #A855F7);
+  background: linear-gradient(90deg, #EA580C, #F97316);
   box-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
 }
 
